@@ -1,7 +1,7 @@
 trigger AvoidCreationOfMoreThanThreeSR on Territory__c (before insert) {
 	
     List<Territory__c> terrList=new List<Territory__c>([select zip_code__c from Territory__c]);
-    integer i=1;
+    integer i=0;
     
     for(Territory__c t:Trigger.new)
     {
@@ -10,7 +10,7 @@ trigger AvoidCreationOfMoreThanThreeSR on Territory__c (before insert) {
             if(t.zip_code__c==l.zip_code__c)
                 i=i+1;
         }
-        if(i>3)
+        if(i>2)
             t.addError('Limit Exceeds!');
     }
 }
